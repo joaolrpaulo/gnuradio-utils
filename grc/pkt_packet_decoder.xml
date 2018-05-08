@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<block>
+    <name>Packet Decoder (Custom)</name>
+    <key>pkt_packet_decoder</key>
+    <category>pkt</category>
+    <import>import pkt</import>
+    <make>pkt.packet_demod_$(type.fcn)(pkt.packet_decoder(station_id=$station_id, callback=lambda ok, payload: self.$(id).recv_pkt(ok, payload)),)</make>
+    <param>
+        <name>Output Type</name>
+        <key>type</key>
+        <value>float</value>
+        <type>enum</type>
+        <option>
+            <name>Complex</name>
+            <key>complex</key>
+            <opt>fcn:c</opt>
+        </option>
+        <option>
+            <name>Float</name>
+            <key>float</key>
+            <opt>fcn:f</opt>
+        </option>
+        <option>
+            <name>Int</name>
+            <key>int</key>
+            <opt>fcn:i</opt>
+        </option>
+        <option>
+            <name>Short</name>
+            <key>short</key>
+            <opt>fcn:s</opt>
+        </option>
+        <option>
+            <name>Byte</name>
+            <key>byte</key>
+            <opt>fcn:b</opt>
+        </option>
+    </param>
+    <param>
+        <name>Station ID</name>
+        <key>station_id</key>
+        <value/>
+        <type>string</type>
+    </param>
+    <sink>
+        <name>in</name>
+        <type>byte</type>
+    </sink>
+    <source>
+        <name>out</name>
+        <type>$type</type>
+    </source>
+    <doc>
+        Packet decoder block, for use with the gnuradio demodulator blocks: gmsk, psk, qam.
+    </doc>
+</block>
