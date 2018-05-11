@@ -31,7 +31,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    packet.py DESTINATION ${GR_PYTHON_DIR}/pkt
+    packet.py
+    timestamp_generator.py
+    timestamp_decoder.py DESTINATION ${GR_PYTHON_DIR}/pkt
 )
 
 ########################################################################

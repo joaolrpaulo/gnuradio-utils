@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<block>
+  <name>Timestamp Decoder</name>
+  <key>pkt_timestamp_decoder</key>
+  <category>[Indoor Location]</category>
+  <import>import pkt</import>
+  <make>pkt.timestamp_decoder()</make>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+</block>

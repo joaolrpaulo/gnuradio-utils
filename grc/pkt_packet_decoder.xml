@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <block>
-    <name>Packet Decoder (Custom)</name>
+    <name>Packet Decoder</name>
     <key>pkt_packet_decoder</key>
-    <category>pkt</category>
+    <category>[Indoor Location]</category>
     <import>import pkt</import>
     <make>pkt.packet_demod_$(type.fcn)(pkt.packet_decoder(station_id=$station_id, callback=lambda ok, payload: self.$(id).recv_pkt(ok, payload)),)</make>
     <param>
