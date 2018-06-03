@@ -685,8 +685,10 @@ from gnuradio import gr
 
 class timestamp_decoder(gr.sync_block):
 
-    def __init__(self):  # only default arguments here
+    def __init__(self, id=""):  # only default arguments here
         gr.sync_block.__init__(self, name='timestamp_decoder', in_sig=[np.int8], out_sig=None)
+
+        self.id = id
 
     def work(self, input_items, output_items):
         now = datetime.now()
@@ -696,7 +698,7 @@ class timestamp_decoder(gr.sync_block):
 
         transmitted_timestamp_info = struct.unpack("I", input_items[0])[0]
 
-        print "Received 1: ", transmitted_timestamp_info
+        print "Received %s: %d at %d" % (self.id, transmitted_timestamp_info, now_timestamp_info)
 
         return len(input_items[0])
 

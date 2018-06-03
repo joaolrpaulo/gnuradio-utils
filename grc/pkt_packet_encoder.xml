@@ -2,7 +2,7 @@
 <block>
     <name>Packet Encoder</name>
     <key>pkt_packet_encoder</key>
-    <category>[Indoor Location]</category>
+    <category>Indoor Location</category>
     <import>import pkt</import>
     <make>pkt.packet_mod_$(type.fcn)(pkt.packet_encoder(station_id=$station_id), payload_length=$payload_length)</make>
     <param>

@@ -2,9 +2,14 @@
 <block>
   <name>Timestamp Generator</name>
   <key>pkt_timestamp_generator</key>
-  <category>[Indoor Location]</category>
+  <category>Indoor Location</category>
   <import>import pkt</import>
-  <make>pkt.timestamp_generator()</make>
+  <make>pkt.timestamp_generator(id=$identifier)</make>
+  <param>
+    <name>ID</name>
+    <key>identifier</key>
+    <type>string</type>
+  </param>
   <source>
     <name>out</name>
     <type>byte</type>

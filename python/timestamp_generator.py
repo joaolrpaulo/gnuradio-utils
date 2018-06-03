@@ -685,9 +685,10 @@ from datetime import datetime
 
 class timestamp_generator(gr.sync_block):
 
-    def __init__(self):  # only default arguments here
+    def __init__(self, id = ""):  # only default arguments here
         gr.sync_block.__init__(self, name='timestamp_generator', in_sig=None, out_sig=[np.int8])
 
+        self.id = id
         self.first_time = True
 
     def work(self, input_items, output_items):
@@ -702,7 +703,7 @@ class timestamp_generator(gr.sync_block):
 
         now_timestamp_info = (now_timestamp % 3600 + now.microsecond * 10e-6) * 10e5
 
-        print "Sent 1: ", int(now_timestamp_info)
+        print "Sent %s: %d" % (self.id, int(now_timestamp_info))
 
         timestamp_info = bytearray(struct.pack("I", int(now_timestamp_info)))
 
