@@ -685,7 +685,7 @@ from datetime import datetime
 
 class timestamp_generator(gr.sync_block):
 
-    def __init__(self, id = ""):  # only default arguments here
+    def __init__(self, id=0):  # only default arguments here
         gr.sync_block.__init__(self, name='timestamp_generator', in_sig=None, out_sig=[np.int8])
 
         self.id = id
@@ -698,14 +698,9 @@ class timestamp_generator(gr.sync_block):
         else:
             self.first_time = False
 
-        now = datetime.now()
-        now_timestamp = time.mktime(now.timetuple())
+        print "Sent %s: %d" % (self.id, int(self.id))
 
-        now_timestamp_info = (now_timestamp % 3600 + now.microsecond * 10e-6) * 10e5
-
-        print "Sent %s: %d" % (self.id, int(now_timestamp_info))
-
-        timestamp_info = bytearray(struct.pack("I", int(now_timestamp_info)))
+        timestamp_info = bytearray(struct.pack("I", int(self.id)))
 
         timestamp_info_len = len(timestamp_info)
         output_0_len = len(output_items[0])

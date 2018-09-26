@@ -678,9 +678,9 @@
 
 from datetime import datetime
 import time
-import struct
 import numpy as np
 from gnuradio import gr
+import zmq
 
 
 class timestamp_decoder(gr.sync_block):
@@ -692,13 +692,17 @@ class timestamp_decoder(gr.sync_block):
 
     def work(self, input_items, output_items):
         now = datetime.now()
-        now_timestamp = time.mktime(now.timetuple())
 
-        now_timestamp_info = (now_timestamp % 3600 + now.microsecond * 10e-6) * 10e5
+        context = zmq.Context()
 
-        transmitted_timestamp_info = struct.unpack("I", input_items[0])[0]
+        #  Socket to talk to server
+        socket = context.socket(zmq.DEALER)
+        socket.setsockopt(zmq.IDENTITY, b"%s" % (input_items[0][0]))
+        socket.connect("tcp://localhost:10001")
 
-        print "Received %s: %d at %d" % (self.id, transmitted_timestamp_info, now_timestamp_info)
+        socket.send("%s" % np.datetime64(now).view('<i8'))
+
+        socket.close()
 
         return len(input_items[0])
 
