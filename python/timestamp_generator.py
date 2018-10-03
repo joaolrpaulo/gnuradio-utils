@@ -681,6 +681,7 @@ import struct
 import numpy as np
 from gnuradio import gr
 from datetime import datetime
+import zmq
 
 
 class timestamp_generator(gr.sync_block):
@@ -694,7 +695,7 @@ class timestamp_generator(gr.sync_block):
     def work(self, input_items, output_items):
         # Sleep for a while to send and receive information
         if not self.first_time:
-            time.sleep(3)
+            time.sleep(5)
         else:
             self.first_time = False
 
@@ -708,6 +709,16 @@ class timestamp_generator(gr.sync_block):
         timestamp_info.extend(output_items[0][ timestamp_info_len : output_0_len ])
 
         output_items[0][:] = timestamp_info
+
+        context = zmq.Context()
+        #  Socket to talk to server
+        socket = context.socket(zmq.DEALER)
+        socket.setsockopt(zmq.IDENTITY, b"sender")
+        socket.connect("tcp://localhost:10001")
+
+        socket.send("++")
+
+        socket.close()
 
         return len(output_items[0][ : timestamp_info_len ])
 

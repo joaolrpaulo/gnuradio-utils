@@ -7,15 +7,13 @@ import gnuradio.gr.gr_threading as _threading
 DEFAULT_PAYLOAD_LEN = 512
 
 # how many messages in a queue
-DEFAULT_MSGQ_LIMIT = 2  # type: int
+DEFAULT_MSGQ_LIMIT = 4  # type: int
 
 # threshold for unmaking packets
-DEFAULT_THRESHOLD = 12
+DEFAULT_THRESHOLD = 16
 
 STATION_CODES = {
-    "default": packet_utils.default_access_code,
-    "0001": "1010110011011101101001001110001011110010100011000010000011111100",
-    "0002": "1011001101110110100100111000101111001010001100001000001111110010"
+    "default": "1010110011011101101001001110001011110010100011000010000011111100",
 }
 
 
@@ -66,7 +64,7 @@ class packet_encoder(gr.hier_block2):
     Hierarchical block for wrapping packet-based modulators.
     """
 
-    def __init__(self, station_id=''):
+    def __init__(self):
         """
         packet_mod constructor.
 
@@ -78,8 +76,8 @@ class packet_encoder(gr.hier_block2):
         self._bits_per_symbol = 1
         self._pad_for_usrp = False
 
-        access_code = STATION_CODES[station_id] if station_id else STATION_CODES["default"]
-        preamble = packet_utils.default_preamble
+        access_code = STATION_CODES["default"]
+        preamble = packet_utils.default_preamble + "1010110011011101101001001110001011110010100011000010000011111100"
 
         if not packet_utils.is_1_0_string(preamble):
             raise ValueError, "Invalid preamble %r. Must be string of 1's and 0's" % (preamble,)
@@ -147,7 +145,7 @@ class packet_decoder(gr.hier_block2):
     Hierarchical block for wrapping packet-based demodulators.
     """
 
-    def __init__(self, station_id='', callback=None):
+    def __init__(self, callback=None):
         """
         packet_demod constructor.
 
@@ -156,7 +154,7 @@ class packet_decoder(gr.hier_block2):
         """
         # access code
         self._threshold = DEFAULT_THRESHOLD
-        access_code = STATION_CODES[station_id] if station_id else STATION_CODES["default"]
+        access_code = STATION_CODES["default"]
 
         if not packet_utils.is_1_0_string(access_code):
             raise ValueError, "Invalid access_code %r. Must be string of 1's and 0's" % (access_code,)

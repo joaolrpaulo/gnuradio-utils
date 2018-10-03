@@ -4,7 +4,7 @@
     <key>pkt_packet_decoder</key>
     <category>Indoor Location</category>
     <import>import pkt</import>
-    <make>pkt.packet_demod_$(type.fcn)(pkt.packet_decoder(station_id=$station_id, callback=lambda ok, payload: self.$(id).recv_pkt(ok, payload)),)</make>
+    <make>pkt.packet_demod_$(type.fcn)(pkt.packet_decoder(callback=lambda ok, payload: self.$(id).recv_pkt(ok, payload)),)</make>
     <param>
         <name>Output Type</name>
         <key>type</key>
@@ -35,12 +35,6 @@
             <key>byte</key>
             <opt>fcn:b</opt>
         </option>
-    </param>
-    <param>
-        <name>Station ID</name>
-        <key>station_id</key>
-        <value/>
-        <type>string</type>
     </param>
     <sink>
         <name>in</name>
