@@ -1,0 +1,16 @@
+/snap/clion/44/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/joaopaulo/coding/fac/gnuradio-utils
+-- Boost version: 1.65.1
+-- Found the following Boost libraries:
+--   filesystem
+--   system
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+Checking for GNU Radio Module: RUNTIME
+ * INCLUDES=/usr/include
+ * LIBS=/usr/lib/x86_64-linux-gnu/libgnuradio-runtime.so;/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so;/usr/lib/x86_64-linux-gnu/liblog4cpp.so
+GNURADIO_RUNTIME_FOUND = TRUE
+-- No C++ sources... skipping lib/
+-- No C++ sources... skipping swig/
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/joaopaulo/coding/fac/gnuradio-utils/cmake-build-debug

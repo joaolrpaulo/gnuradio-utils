@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>Messages Decoder</name>
-  <key>pkt_timestamp_decoder</key>
-  <category>Indoor Location</category>
+  <name>Message Decoder</name>
+  <key>utilsMessageDecoder</key>
+  <category>IndoorLocationUtils</category>
   <import>import pkt</import>
-  <make>pkt.timestamp_decoder(id=$identifier)</make>
-  <param>
-    <name>ID</name>
-    <key>identifier</key>
-    <type>string</type>
-  </param>
+  <make>pkt.messageDecoder(stationid=$identifier)</make>
   <sink>
     <name>in</name>
     <type>byte</type>
